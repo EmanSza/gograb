@@ -8,6 +8,6 @@
 
 Anime Scraper using tools like Electron, Puppeteer, and Express.
 
-<style type="text/css">
+<style ..type="text/css">
     .centered-content { display:flex; align-items:center; flex-direction:column; }
 </style>
