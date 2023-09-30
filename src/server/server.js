@@ -1,7 +1,6 @@
 const express = require('express');
-const flash = require('express-flash');
-const session = require('express-session');
 const path = require('path');
+const routeDir = require('./utility/routeDir')
 
 const app = express();
 
@@ -11,11 +10,7 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use(session({secret: "thisdoesntmatter"}));
-app.use(flash());
+routeDir(app);
 
-app.get('/', (req, res) => {
-    res.render('index');
-});
 
 module.exports = app;
