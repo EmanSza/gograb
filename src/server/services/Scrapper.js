@@ -1,5 +1,6 @@
-const { link } = require('original-fs');
 const puppeteer = require('puppeteer');
+const nodeCache = require('node-cache');
+const myCache = new nodeCache();
 
 class Scrapper {
     constructor() {
@@ -9,16 +10,19 @@ class Scrapper {
         this.page = null;
         this.url = "https://gogoanimehd.io/"
         this.baseUrl = "https://gogoanimehd.io/"
+        this.myCache = myCache;
     }
     async startBrowser() {
-        this.browser = await this.puppeteer.launch({ headless: false });
+        this.browser = await this.puppeteer.launch({ 
+            headless: true,
+         });
         this.page = await this.browser.newPage();
     }
     async closeBrowser() {
         await this.browser.close();
     }
     async getAnime(name) {
-        await this.page.goto(this.url + "search.html?keyword=" + name + "&sort=title_az", { waitUntil: 'networkidle2' });
+        await this.page.goto(this.url + "search.html?keyword=" + name + "&sort=title_az", { waitUntil: 'domcontentloaded' });
     
         console.log("Page loaded.");
     
@@ -41,6 +45,7 @@ class Scrapper {
                 };
                 list.push(anime);
             }
+
             return list;
         });
         console.log('animeList', animeList);

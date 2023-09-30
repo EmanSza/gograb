@@ -3,7 +3,7 @@ const path = require('path');
 const routeDir = require('./utility/routeDir')
 
 const app = express();
-
+console.log(path.join(__dirname, '../client/public'))
 app.use(express.static(path.join(__dirname, '../client/public')))
 app.set('views', path.join(__dirname, '../client/pages'));
 app.set('view engine', 'ejs');

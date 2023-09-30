@@ -2,23 +2,18 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <title>GoGrabbers</title>
+    <link rel="stylesheet" href="/css/nav.css" />
+    <link rel="stylesheet" href="/css/popular.css" />
+    <link rel="stylesheet" href="/css/index.css" />
+    <script src="/js/nav.js"></script>
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
 </head>
+<%- include('./templates/nav.ejs') %>
 <body>
-    <% if (results) { %>
-        <h1>Results</h1>
-        <ul>
-            <% results.forEach(function(result) { %>
-                <li>
-                    <a href=<%= result.link %>>
-                        <img src=<%= result.image %> alt="image" width="200" height="200">
-                        <%= result.title %>
-                    </a>
-                    <br>
-                </li>
-            <% }); %>
-        </ul>
-    <% } %>
+
+    <div class="container">
+            <%- include('./templates/popular.index.ejs') %>
+    </div>
 </body>
 </html>

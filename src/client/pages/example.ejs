@@ -1,0 +1,14 @@
+<% if (results) { %>
+    <h1>Results</h1>
+    <ul>
+        <% results.forEach(function(result) { %>
+            <li>
+                <a href=<%= result.link %>>
+                    <img src=<%= result.image %> alt="image" width="200" height="200">
+                    <%= result.title %>
+                </a>
+                <br>
+            </li>
+        <% }); %>
+    </ul>
+<% } %>

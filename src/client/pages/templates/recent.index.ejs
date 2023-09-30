@@ -1,0 +1,18 @@
+<% if (results) { %>
+    <h1>Results</h1>
+    <ul>
+        <% results.recent.forEach(function(result) { %>
+            <!-- console log result -->
+            <!-- console.log(result); -->
+
+            <%= result %>
+            <div class="item">
+                <a href=<%= result.link %>>
+                    <img src=<%= result.image %> alt="image" width="200" height="200">
+                    <p><%= result.title %></p>
+                </a>
+                <br>
+            </div>
+        <% }); %>
+    </ul>
+<% } %>
