@@ -12,9 +12,10 @@ class Scrapper {
         this.baseUrl = "https://gogoanimehd.io/"
         this.myCache = myCache;
     }
+
     async startBrowser() {
         this.browser = await this.puppeteer.launch({ 
-            headless: true,
+            headless: 'new',
          });
         this.page = await this.browser.newPage();
     }
@@ -23,35 +24,58 @@ class Scrapper {
     }
     async getAnime(name) {
         await this.page.goto(this.url + "search.html?keyword=" + name + "&sort=title_az", { waitUntil: 'domcontentloaded' });
-    
-        console.log("Page loaded.");
-    
-        // Wait for all the "li" elements inside ".items" class
         await this.page.waitForSelector('.items li');
-    
         const animeList = await this.page.evaluate(() => {
-            console.log('inside evaluate');
             const list = [];
             const elements = document.querySelectorAll('.items li');
-            console.log(elements);
             for (const element of elements) {
                 let anime = {
-                    // Title is in the p tag in the a tag
                     title: element.querySelector('.name a').innerText,
-                    // Image is in the img tag that has an "a" child with the img inside
                     image: element.querySelector('.img a img').src,
-                    // Link
                     link: element.querySelector('.name a').href,
                 };
                 list.push(anime);
             }
-
             return list;
         });
-        console.log('animeList', animeList);
         return animeList;
     }
-
+    async getPopular() {
+        await this.page.goto(this.url + "popular.html", { waitUntil: 'domcontentloaded' });
+        await this.page.waitForSelector('.items li');
+        const animeList = await this.page.evaluate(() => {
+            const list = [];
+            const elements = document.querySelectorAll('.items li');
+            for (const element of elements) {
+                let anime = {
+                    title: element.querySelector('.name a').innerText,
+                    image: element.querySelector('.img a img').src,
+                    link: element.querySelector('.name a').href,
+                };
+                list.push(anime);
+            }
+            return list;
+        });
+        return animeList;
+    }
+    async getRecent() {
+        await this.page.goto(this.url, { waitUntil: 'domcontentloaded' });
+        await this.page.waitForSelector('.items li');
+        const animeList = await this.page.evaluate(() => {
+            const list = [];
+            const elements = document.querySelectorAll('.items li');
+            for (const element of elements) {
+                let anime = {
+                    title: element.querySelector('.name a').innerText,
+                    image: element.querySelector('.img a img').src,
+                    link: element.querySelector('.name a').href,
+                };
+                list.push(anime);
+            }
+            return list;
+        });
+        return animeList;
+    }
 }
 
 module.exports = Scrapper;

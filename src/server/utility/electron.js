@@ -4,14 +4,22 @@ const path = require('path');
 const startElectron = () => {
     function createWindow () {
         const win = new BrowserWindow({
-          width: 800,
-          height: 600,
+          width: 780,
+          height: 768,
+          minWidth: 780,
+          minHeight: 768,
           webPreferences: {
             preload: path.join(__dirname, 'preload.js')
           }
         })
     
-        win.loadURL('http://localhost:3000')
+        win.loadURL('http://localhost:3000/loading')
+
+        win.webContents.on('new-window', (event, url) => {
+          event.preventDefault(); // Prevent the default behavior (open in default browser)
+          const newWindow = new BrowserWindow({ width: 800, height: 600 });
+          newWindow.loadURL(url);
+        });
     }
     
     
@@ -30,6 +38,11 @@ const startElectron = () => {
       if (process.platform !== 'darwin') {
         app.quit()
       }
+    })
+    // If the app gets any errors close the app
+    app.on('error', () => {
+      app.quit()
+      process.exit()
     })
 }
 
