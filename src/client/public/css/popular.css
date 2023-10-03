@@ -13,7 +13,7 @@
 /* Set the content height to 100% of the viewport height */
 .content {
     width: 90%;
-    height: 65vh;
+    height: 45vh;
     margin: 0 auto;
     /* Add outer space */
     padding: 2vh 0;
@@ -103,5 +103,5 @@
     transform: scale(1.1);
 }
 .middle:hover {
-    transform: scale(1.2);
+    transform: scale(1.15);
 }

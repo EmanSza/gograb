@@ -24,6 +24,13 @@ class Scrapper {
     }
     async getAnime(name) {
         await this.page.goto(this.url + "search.html?keyword=" + name + "&sort=title_az", { waitUntil: 'domcontentloaded' });
+
+        const hasElements = await this.page.$('.items li');
+
+        if (hasElements === null) {
+          return []; // Return an empty list if no elements are found
+        }
+
         await this.page.waitForSelector('.items li');
         const animeList = await this.page.evaluate(() => {
             const list = [];

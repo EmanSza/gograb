@@ -52,11 +52,12 @@
 
 /* Right Nav */
 .nav .nav-right {
+    position: relative;
     background-color: var(--accent-color);
     border-radius: 10px;
     margin: 0 10px;
     padding: 5px 10px;
-
+    margin-right: 50px;
 }
 .nav .nav-right form {
     display: flex;
@@ -68,6 +69,7 @@
 
 }
 .nav .nav-right input:focus {
+    position: relative;
     outline: none;
 }
 
@@ -90,5 +92,37 @@
     appearance: none;
     background-color: inherit;
     /* Ceter */
+}
+.results-container {
+    position: absolute; /* Position the dropdown absolutely within the parent */
+    display: none;
+    top: 100%; /* Position the dropdown below the nav-right section */
+    left: 0;
+    width: 100%;
+    background-color: var(--accent-color);
+    margin-top: 10px;
+    box-shadow: 0px 4px 10px 10px rgba(0, 0, 0, 0.25);
+}
+.results-container a {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+    padding: 5px 10px;
+    text-decoration: none;
+    border: 1px solid rgba(0, 0, 0, 0.50);
+}
 
+.results-container a img {
+    width: 75px;
+    height: 75px;
+}
+.results-container a h2 {
+    font-size: 1.2em;
+    color: var(--main-color);
+    text-decoration: none;
+    margin: 0 10px;
+}
+.results-container a:hover h2 {
+    color: var(--soundary-color);
 }
