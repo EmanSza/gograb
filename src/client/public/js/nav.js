@@ -16,13 +16,20 @@ searchForm.addEventListener('submit', (e) => {
 });
 // When the user is inside the search input, display results.container
 // When the user is outside the search input, hide results.container
-const results = document.querySelector('.results-container');
 
 searchInput.addEventListener('focus', () => {
-    results.style.display = 'block';
+    const results = document.querySelector('.results-container');
+    // check if the results container is empty
+    console.log(results.innerHTML);
+    if (results.innerHTML.trim() === '') {
+        results.style.display = 'none';
+    } else {
+        results.style.display = 'block';
+    }
 });
 
 searchInput.addEventListener('blur', () => {
+    const results = document.querySelector('.results-container');
     results.style.display = 'none';
 });
 
@@ -54,10 +61,7 @@ function sendPostRequest() {
         resultsContainer = document.querySelector('.results-container');
 
         const items = data.scrappedResults;
-        let newResults = {};
         console.log(items);
-
-        // if there are more then 7 items, remove the rest
         if (items.length > 7) {
             items.splice(7);
         }
@@ -77,9 +81,13 @@ function sendPostRequest() {
             anchor.appendChild(title);
 
             resultsContainer.appendChild(anchor);
-            
         });
 
+        if (resultsContainer.innerHTML.trim() === '') {
+            resultsContainer.style.display = 'none';
+        } else {
+            resultsContainer.style.display = 'block';
+        }
     })
     .catch(error => {
         console.error(error);
