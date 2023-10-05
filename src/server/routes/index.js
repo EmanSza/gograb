@@ -34,4 +34,11 @@ router.get('/', async (req, res) => {
 
 });
 
+router.get('/search', async (req, res) => {
+  const searchTerm = req.query.search; 
+  
+  res.render('search', { results });  
+  
+});
+
 module.exports = router;

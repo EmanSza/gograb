@@ -9,23 +9,6 @@ router.get('/', async (req, res) => {
     });
 });
 
-router.get('/search', async (req, res) => {
-    const searchTerm = req.query.search; 
-
-    if(searchTerm) {
-        let results = {};
-        const scrapper = new Scrapper();
-        await scrapper.startBrowser();
-    
-        let scrappedResults = await scrapper.getAnime(searchTerm);
-    
-        await scrapper.closeBrowser();
-    
-        results.search = scrappedResults;
-    
-        res.render('search', { results });  
-    }
-});
 router.post('/search', async (req, res) => {
     const search = req.body.input;
 

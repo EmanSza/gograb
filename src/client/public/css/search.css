@@ -1,0 +1,18 @@
+:root {
+    --nav-height: 6vh;
+    --nav-width: 100%;
+ 
+    --main-color: #573A98;
+    --soundary-color: #F53CDA;
+    --accent-color: #ADA0DD;
+    --tertiary-color: #F7F8F6;
+ 
+ }
+ html, body {
+    margin: 0;
+ }
+ .container {
+    width: 100%;
+    height: calc(100dvh - 80px);
+    background-color: #dacbdf;
+}
