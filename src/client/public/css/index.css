@@ -8,4 +8,10 @@
     width: 100%;
     height: calc(100dvh - 80px);
     background-color: #dacbdf;
+    display: flex;
+	    flex-direction: column;
+	    flex-wrap: nowrap;
+	    justify-content: flex-start;
+	    align-items: stretch;
+	    align-content: stretch;
 }

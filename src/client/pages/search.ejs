@@ -16,3 +16,18 @@
 </body>
 
 </html>
+
+<% if (results) { %>
+    <% results.forEach(function(result, index) { %>
+        <div class="item">
+            <a href=<%= result.link %> target="_blank">
+                <div class="image-container">
+                    <img src=<%= result.image %> alt="image">
+                </div>
+                <div class="title-container">
+                    <h2><%= result.title %></h2>
+                </div>
+            </a>
+        </div>
+    <% }); %>
+<% } %>
