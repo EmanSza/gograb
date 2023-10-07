@@ -3,66 +3,121 @@ let item = document.querySelector('.item');
 let items = document.querySelectorAll('.item');
 
 let slideContentWidth = slideContent[0].offsetWidth;
-let itemWidth = item.offsetWidth;
+let itemWidth = 135 + 10;
+
+const parsedResultsPop = JSON.parse(resultsPopular);
+const parsedResultsRecent = JSON.parse(resultsPopular);
 
 
-const itemContent = 
-`
-<div class="item">
-<a href="google.com" target="_blank">
-    <div class="image-container">
-        <img src="https://cdn.myanimelist.net/images/anime/5/87048.jpg?s=4d9f9a7a4a4e4f2a4a4a4a4a4a4a4a4a" alt="image">
+function generateItemHTML(title, image, link) {
+    return `
+    <div class="item">
+        <a href="${link}" target="_blank">
+            <div class="image-container">
+                <img src="${image}" alt="image">
+            </div>
+            <div class="title-container">
+                <h2>${title}</h2>
+            </div>
+        </a>
     </div>
-    <div class="title-container">
-        <h2>Wether With you</h2>
-    </div>
-</a>
-</div>
-`
-// On resize, check to see if items need to be removed or added
-// Each item is 135px wide. so based on the width of the slideContent and
-// the width of itemWidth. if we can fit more do so
+    `;
+}
 
-function checkWidths () {
-    // Check current length 
+function slideID() {
     slideContent = document.querySelectorAll('.slide-content');
-    item = document.querySelector('.item');
-    items = document.querySelectorAll('.item');
-
-    slideContentWidth = slideContent[0].offsetWidth;
-    itemWidth = item.offsetWidth;
-    // Add the items margin to the width for the left and right side
-    let itemWidthWithMargin = 135 + 10;
-    let itemFit = Math.floor(slideContentWidth / itemWidthWithMargin);
-    let itemsLength = []
-    // For each child of slideContent, add the amount of items in it to the array
-    slideContent.forEach(element => {
-        itemsLength.push(element.childElementCount);
-    });
-
-    // if the amount of items in the array is less than the amount of items that can fit
-    
-    itemsLength.forEach((element, index) => {
-        if (element < itemFit) {
-            // add items to the element
-            for (let i = 0; i < itemFit - element; i++) {
-                slideContent[index].innerHTML += itemContent;
-            }
-        } else if (element > itemFit) {
-            // remove items from the element
-            for (let i = 0; i < element - itemFit; i++) {
-                slideContent[index].lastChild.remove();
-            }
-        }
+    // If its the first slide give it a id of 1 and so on
+    slideContent.forEach((element, index) => {
+        element.id = index + 1;
     });
 }
 
+function createSlides(items) {
+    let itemFit = Math.floor(slideContentWidth / itemWidth);
+    let totalSlides = Math.ceil(items.length / itemFit);
+    slideContent = document.querySelectorAll('.slide-content');
+    // If totalSlides is a whole numbering that has a decialm, add 1 to it
+    if (totalSlides % 1 != 0) {
+        totalSlides = Math.ceil(totalSlides);
+    }
+    console.log(totalSlides);
+    slideContent.forEach(element => {
+        for (let i = 0; i < totalSlides; i++) {
+            element.innerHTML += `<div class="slide"></div>`;
+        }
+    });
+}
+function addItemstoSlides(items, slideId) {
+    let itemFit = Math.floor(slideContentWidth / itemWidth);
+    let slideContentId = document.getElementById(slideId);
+    console.log(slideContentId.children);
+
+    // For each slide, add items to it based on the itemFit
+    for (let i = 0; i < slideContentId.children.length; i++) {
+        for (let j = 0; j < itemFit; j++) {
+            slideContentId.children[i].innerHTML += generateItemHTML(items[j].title, items[j].image, items[j].link);
+        }
+    }
+    
+}
+function resizeSlides(items, id) {
+    slideContent = document.querySelectorAll('.slide-content');
+    slideContentWidth = slideContent[0].offsetWidth;
+    
+    // Get the slide content by id
+    let slideContentId = document.getElementById(id);
+    
+    // Calculate the number of items that can fit in one slide
+    let itemFit = Math.floor(slideContentWidth / itemWidth);
+    
+    // Calculate the total number of slides needed to accommodate all items
+    let totalSlides = Math.ceil(items.length / itemFit);
+
+    // If totalSlides is not a whole number, round it up to the nearest integer
+    if (totalSlides % 1 !== 0) {
+        totalSlides = Math.ceil(totalSlides);
+    }
+
+    // Calculate the number of items that should be in the last slide
+    let itemsInLastSlide = items.length % itemFit || itemFit;
+
+    // Check if there are too many items in the slides
+    if (slideContentId.children.length > totalSlides) {
+        // Remove extra slides
+        while (slideContentId.children.length > totalSlides) {
+            slideContentId.removeChild(slideContentId.lastChild);
+        }
+    } else if (slideContentId.children.length < totalSlides) {
+        // Add more slides if needed
+        for (let i = slideContentId.children.length; i < totalSlides; i++) {
+            slideContentId.innerHTML += `<div class="slide"></div>`;
+        }
+    }
+
+    // Update the items in each slide
+    for (let i = 0; i < slideContentId.children.length; i++) {
+        slideContentId.children[i].innerHTML = '';
+        for (let j = i * itemFit; j < (i === totalSlides - 1 ? i * itemFit + itemsInLastSlide : (i + 1) * itemFit); j++) {
+            if (items[j]) {
+                slideContentId.children[i].innerHTML += generateItemHTML(items[j].title, items[j].image, items[j].link);
+            }
+        }
+    }
+}
+
+
 // On resize, check to see if items need to be removed or added
 window.addEventListener('resize', () => {
-    checkWidths();
+    resizeSlides(parsedResultsPop, 1);
+    resizeSlides(parsedResultsRecent, 2);
 });
 
 // On load, check to see if items need to be removed or added
 window.addEventListener('load', () => {
-    checkWidths();
+    slideID();
+    createSlides(parsedResultsPop);
+
+    addItemstoSlides(parsedResultsPop, 1);
+    addItemstoSlides(parsedResultsRecent, 2);
+    
 });
