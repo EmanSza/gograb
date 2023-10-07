@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
     await scrapper.startBrowser();
 
     // sleep for 2 seconds
-    await new Promise(r => setTimeout(r, 2000));
+    await new Promise(r => setTimeout(r, 750));
 
     scrappedResults = await scrapper.getRecent();
 
@@ -29,7 +29,7 @@ router.get('/', async (req, res) => {
 
     // Put the results in an object called recent
     results.recent = scrappedResults;
-
+  
     res.render('index', { results });
 
 });

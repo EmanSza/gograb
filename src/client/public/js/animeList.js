@@ -43,19 +43,23 @@ function createSlides(items) {
     console.log(totalSlides);
     slideContent.forEach(element => {
         for (let i = 0; i < totalSlides; i++) {
-            element.innerHTML += `<div class="slide"></div>`;
+            let div = document.createElement('div');
+            div.classList.add('slide');
+            element.appendChild(div);
         }
     });
 }
 function addItemstoSlides(items, slideId) {
-    let itemFit = Math.floor(slideContentWidth / itemWidth);
     let slideContentId = document.getElementById(slideId);
-    console.log(slideContentId.children);
-
-    // For each slide, add items to it based on the itemFit
+    let itemFit = Math.floor(slideContentWidth / itemWidth);
+    let totalSlides = Math.ceil(items.length / itemFit);
+    let itemsInLastSlide = items.length % itemFit || itemFit;
     for (let i = 0; i < slideContentId.children.length; i++) {
-        for (let j = 0; j < itemFit; j++) {
-            slideContentId.children[i].innerHTML += generateItemHTML(items[j].title, items[j].image, items[j].link);
+        slideContentId.children[i].innerHTML = '';
+        for (let j = i * itemFit; j < (i === totalSlides - 1 ? i * itemFit + itemsInLastSlide : (i + 1) * itemFit); j++) {
+            if (items[j]) {
+                slideContentId.children[i].innerHTML += generateItemHTML(items[j].title, items[j].image, items[j].link);
+            }
         }
     }
     
@@ -90,7 +94,10 @@ function resizeSlides(items, id) {
     } else if (slideContentId.children.length < totalSlides) {
         // Add more slides if needed
         for (let i = slideContentId.children.length; i < totalSlides; i++) {
-            slideContentId.innerHTML += `<div class="slide"></div>`;
+            // Create the div element  and have the div be called slide and fade not using innerHTML
+            let div = document.createElement('div');
+            div.classList.add('slide');
+            slideContentId.appendChild(div);
         }
     }
 
@@ -99,7 +106,7 @@ function resizeSlides(items, id) {
         slideContentId.children[i].innerHTML = '';
         for (let j = i * itemFit; j < (i === totalSlides - 1 ? i * itemFit + itemsInLastSlide : (i + 1) * itemFit); j++) {
             if (items[j]) {
-                slideContentId.children[i].innerHTML += generateItemHTML(items[j].title, items[j].image, items[j].link);
+                slideContentId.appendChild(generateItemHTML(items[j].title, items[j].image, items[j].link));
             }
         }
     }
@@ -121,3 +128,50 @@ window.addEventListener('load', () => {
     addItemstoSlides(parsedResultsRecent, 2);
     
 });
+
+slideContent = document.querySelectorAll('.slide-content');
+slideContentWidth.forEach(element => {
+    // Inside each element, get the first slide and ad active class to it
+    element.children[0].classList.add('active');
+});
+
+// Begin with the creation of the slideShow
+
+let slideINdex = 1;
+
+let plusSlides = (n) => {
+    // if n is a negative, pass prev, if its positive pass next
+    if (n < 0) {
+        showSlides(slideINdex -= 1, 'prev');
+    }
+    if (n > 0) {
+        showSlides(slideINdex += 1, 'next');
+    }
+}
+let currentSlide = (n) => {
+    showSlides(slideINdex = n, 'none');
+}
+let showSlides = (n, slideButton) => {
+    let slides = document.querySelectorAll('.slide');
+    
+    // Hide all slides by default
+    slides.forEach(slide => {
+        slide.classList.remove('active');
+    });
+    
+    if (slideButton === 'prev') {
+        // Slide to the left
+        slides[n - 1].classList.add('active', 'slideLeft');
+    } else if (slideButton === 'next') {
+        // Slide to the right
+        slides[n - 1].classList.add('active', 'slideRight');
+    } else {
+        // No animation, just show the slide
+        slides[n - 1].classList.add('active');
+    }
+}
+
+
+
+
+
