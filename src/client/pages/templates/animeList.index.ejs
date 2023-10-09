@@ -1,13 +1,13 @@
 <div class="content-container">
     <div class="content">
         <div class="content-header">
-            <a href="google.com"><h2>Popular Anime</h2></a>
+            <a href="google.com"><h2><%= name %></h2></a>
         </div>
         <div class="content-cards">
-            <div class="prev-slide"><a class="prev" onclick="plusSlides(-1)">&#10094;</a></div>
+            <div class="prev-slide" onclick="plusSlides(-1, this)"><a class="prev">&#10094;</a></div>
             <div class="slide-content">
             </div>
-            <div class="next-slide"><a class="next" onclick="plusSlides(1)">&#10095;</a></div>
+            <div class="next-slide" onclick="plusSlides(1, this)"><a class="next">&#10095;</a></div>
         </div>
     </div>
-</div>
+</div> 
