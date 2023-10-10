@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/css/nav.css" />
     <link rel="stylesheet" href="/css/search.css" />
     <script src="/js/nav.js"></script>
+    <script src="/js/search.js" async></script>
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -14,12 +15,12 @@
     <div class="container">
         <div class="search-container">
             <div class="searchform-container">
-                <form class="searchForm" action="/api/search" method="GET">
+                <form class="searchForm" action="/api/search" method="POST">
                     <input class='searchInput'type="text" name="search" placeholder="Search Anime Titles">
                     <button type="submit" class="search-button"></button>
                 </form> 
             </div>
-            <div>
+            <div class="search-content">
                 Letters
             </div>
         </div>
