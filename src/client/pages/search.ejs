@@ -12,6 +12,17 @@
 <%- include('./templates/nav.ejs') %>
 <body>
     <div class="container">
+        <div class="search-container">
+            <div class="searchform-container">
+                <form class="searchForm" action="/api/search" method="GET">
+                    <input class='searchInput'type="text" name="search" placeholder="Search Anime Titles">
+                    <button type="submit" class="search-button"></button>
+                </form> 
+            </div>
+            <div>
+                Letters
+            </div>
+        </div>
     </div>
 </body>
 

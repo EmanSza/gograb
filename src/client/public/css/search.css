@@ -1,11 +1,9 @@
 :root {
-    --nav-height: 6vh;
-    --nav-width: 100%;
- 
     --main-color: #573A98;
     --soundary-color: #F53CDA;
     --accent-color: #ADA0DD;
     --tertiary-color: #F7F8F6;
+    --content-border-radius: 25px;
  
  }
  html, body {
@@ -15,4 +13,53 @@
     width: 100%;
     height: calc(100dvh - 80px);
     background-color: #dacbdf;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-container {
+   width: 90%;
+   height: 90%;
+   background-color: var(--accent-color);
+   border-radius: var(--content-border-radius);
+   display: flex;
+   flex-direction: column;
+}
+.searchform-container {
+   width: 100%;
+   height: 20%;
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+}
+.searchForm {
+   background-color: var(--tertiary-color);
+   border-radius: 5px;
+   padding: 0 10px;
+   width: 20%;
+   min-width: 150px;
+   max-width: 350px;
+   height: 30px;
+   display: flex;
+   flex-direction: row;
+}
+.searchInput {
+   width: 80%;
+   height: 100%;
+   border: none;
+   color: var(--main-color);
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
+}
+.searchForm input:focus {
+   position: relative;
+   outline: none;
+}
+.search-button {
+   width: 20%;
+   height: 100%;
+   border: none;
+   background-color: inherit;
 }

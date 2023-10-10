@@ -1,16 +1,14 @@
-
-<div class="centered-content">
-  <img width="200" src="https://sandboxinnovations.org/images/logo.png">
-  <p style="margin-top:20px">A Solution by Sandbox Innovations</p>
-</div>
+<p align="center"><img width="200" src="https://sandboxinnovations.org/images/logo.png"></p>
+<p style="margin-top: 20px;" align="center">A Solution by Sandbox Innovations</p>
 
 # GoGrabber
 
-Anime Scraper using tools like Electron, Puppeteer, and Express.
+GoGrabber is a Desktop Application designed provide a Enterprise Level UI while Webscraping Anime content from the Internet. With GoGrabber you can download your favouite anime by the season or by the episode.
 
-<style ..type="text/css">
-    .centered-content { display:flex; align-items:center; flex-direction:column; }
-</style>
+GoGrabber uses Gogoanime as a base. so when downloading by the season you'll actually be downloading by the episode, but done automatically for you.
+
+GoGrabber also strives to provide a better User Expereince then gogoanime with a cleaner UI.
+
 
 
 
