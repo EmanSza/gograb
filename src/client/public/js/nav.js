@@ -1,6 +1,33 @@
 const searchForm = document.querySelector('#searchForm');
 const searchInput = document.querySelector('#searchInput');
 
+let svgIcon = `
+<g>
+   <path d="M0,203.25c0,112.1,91.2,203.2,203.2,203.2c51.6,0,98.8-19.4,134.7-51.2l129.5,129.5c2.4,2.4,5.5,3.6,8.7,3.6
+       s6.3-1.2,8.7-3.6c4.8-4.8,4.8-12.5,0-17.3l-129.6-129.5c31.8-35.9,51.2-83,51.2-134.7c0-112.1-91.2-203.2-203.2-203.2
+       S0,91.15,0,203.25z M381.9,203.25c0,98.5-80.2,178.7-178.7,178.7s-178.7-80.2-178.7-178.7s80.2-178.7,178.7-178.7
+       S381.9,104.65,381.9,203.25z"/>
+</g>
+`
+let loadingIcon = `
+<i class="fa fa-circle-o-notch fa-spin">
+`
+function addSVGIcon() {
+    let searchIcon = document.getElementById('search-button');
+    let svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttributeNS(null, 'viewBox', '0 0 512 512');
+    svg.setAttributeNS(null, 'width', '20px');
+    svg.setAttributeNS(null, 'height', '20px');
+    svg.setAttributeNS(null, 'fill', '#000000');
+    svg.classList.add('search-icon1');
+    svg.innerHTML = svgIcon;
+    searchIcon.appendChild(svg);
+
+
+}
+
+window.addEventListener('load', addSVGIcon)
+
 searchForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
@@ -19,8 +46,6 @@ searchForm.addEventListener('submit', (e) => {
 
 searchInput.addEventListener('focus', () => {
     const results = document.querySelector('.results-container');
-    // check if the results container is empty
-    console.log(results.innerHTML);
     if (results.innerHTML.trim() === '') {
         results.style.display = 'none';
     } else {
@@ -43,6 +68,16 @@ searchForm.addEventListener('input', (e) => {
 });
 
 function sendPostRequest() {
+    let searchIcon = document.getElementById('search-button')
+    // icon is a <i>
+    let icon = document.createElement('i');
+    icon.classList.add('fa');
+    icon.classList.add('fa-circle-o-notch');
+    icon.classList.add('fa-spin');
+    icon.classList.add('fa-fw');
+    searchIcon.innerHTML = '';
+    searchIcon.appendChild(icon);
+
     let input = document.getElementById("searchInput").value;
     console.log(input);
 
@@ -58,10 +93,12 @@ function sendPostRequest() {
     })
     .then(response => response.json())
     .then(data => {
+        let searchIcon = document.getElementById('search-button')
+        searchIcon.innerHTML = '';
+        addSVGIcon();
         resultsContainer = document.querySelector('.results-container');
 
         const items = data.scrappedResults;
-        console.log(items);
         if (items.length > 7) {
             items.splice(7);
         }

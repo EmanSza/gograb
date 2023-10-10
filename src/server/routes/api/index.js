@@ -18,9 +18,6 @@ router.post('/search', async (req, res) => {
 
     let scrappedResults = await scrapper.getAnime(search);
 
-
-    console.log(scrappedResults)
-
     await scrapper.closeBrowser();
     if (scrappedResults === null) {
         scrappedResults = [];

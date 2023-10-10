@@ -23,7 +23,7 @@
 	    flex-direction: column;
     background-color: var(--accent-color);
     width: 80%;
-    min-width: 815px;
+    /* min-width: 815px; */
     height: 100%;
 
     border-radius: var(--content-border-radius);
@@ -111,7 +111,7 @@
 	    align-content: stretch;
         width: 86%;
         height: 100%;
-        min-width: 676px;
+        /* min-width: 676px; */
 
 }
 .item {
