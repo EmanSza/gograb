@@ -1,4 +1,5 @@
 const searchForm = document.querySelector('#searchForm');
+console.log(searchForm);
 const searchInput = document.querySelector('#searchInput');
 
 let svgIcon = `
@@ -34,7 +35,7 @@ searchForm.addEventListener('submit', (e) => {
     const searchInputValue = searchInput.value;
 
     if (searchInputValue) {
-        window.location.href = `/api/search?search=${encodeURIComponent(searchTerm)}`;
+        window.location.href = `/search?search=${encodeURIComponent(searchTerm)}`;
 
         searchForm.submit();
     } else {
@@ -66,17 +67,21 @@ searchForm.addEventListener('input', (e) => {
     clearTimeout(typingTimer);
     typingTimer = setTimeout(sendPostRequest, doneTypingInterval);
 });
-
-function sendPostRequest() {
-    let searchIcon = document.getElementById('search-button')
-    // icon is a <i>
+let searchIconI = (element) => {
     let icon = document.createElement('i');
     icon.classList.add('fa');
     icon.classList.add('fa-circle-o-notch');
     icon.classList.add('fa-spin');
     icon.classList.add('fa-fw');
-    searchIcon.innerHTML = '';
-    searchIcon.appendChild(icon);
+    // Make it 20x20
+    icon.style.width = '20px';
+    icon.style.height = '20px';
+    element.innerHTML = '';
+    element.appendChild(icon);
+}
+function sendPostRequest() {
+    let searchIcon = document.getElementById('search-button')
+    searchIconI(searchIcon);
 
     let input = document.getElementById("searchInput").value;
     console.log(input);
