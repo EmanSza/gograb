@@ -1,11 +1,19 @@
 let searchButton = document.getElementById('search-button-all');
 
 let insertLoadingLogo = (element) => {
-    let searchLogo = document.createElement('i');
-    searchLogo.classList.add('fas', 'fa-search');
-    element.appendChild(searchLogo);
+    let icon = document.createElement('i');
+    icon.classList.add('fa');
+    icon.classList.add('fa-circle-o-notch');
+    icon.classList.add('fa-spin');
+    icon.classList.add('fa-fw');
+    // Make it 20x20
+    icon.style.width = '20px';
+    icon.style.height = '20px';
+    element.innerHTML = '';
+    element.appendChild(icon);
 }
 let insertSearchIcon = (element, svg) => {
+    element.innerHTML = '';
     let searchButton = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     searchButton.setAttributeNS(null, 'viewBox', '0 0 512 512');
     searchButton.setAttributeNS(null, 'width', '20px');
@@ -20,7 +28,6 @@ window.addEventListener('load', insertSearchIcon(searchButton, svgIcon));
 
 let addItemtoSearch = (results) => {
     let searchContainer = document.querySelector('.search-content');
-    console.log(searchContainer);
     let searchItem = `
         <a href="https://google.com/">
             <div class="item-container" style="background-image: url(${results.image})">
@@ -42,8 +49,8 @@ let addItemtoSearch = (results) => {
 
 
 let sendSearchRequest = async () => {
+    insertLoadingLogo(searchButton);
     let input = document.getElementById('searchInputPage').value
-    console.log(input);   
     fetch('/api/search', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -51,19 +58,17 @@ let sendSearchRequest = async () => {
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data.scrappedResults);
         let searchContainer = document.querySelector('.search-content');
         searchContainer.innerHTML = '';
         data.scrappedResults.forEach(item => {
-            console.log(item);
             addItemtoSearch(item);
         })
+        insertSearchIcon(searchButton, svgIcon);
     })
 }
 
 let searchFormPage = document.getElementById('searchFormPage');
 searchFormPage.addEventListener('submit', (e) => {
-    console.log('submitting');
     e.preventDefault();
     sendSearchRequest();
 })
@@ -75,13 +80,10 @@ searchButtonAll.addEventListener('click', (e) => {
 
 // if results is not empty OBJECT
 if (results != "false") {
-    console.log(results);
     const anmResults = JSON.parse(results);
-    console.log(anmResults);
     let searchContainer = document.querySelector('.search-content');
     searchContainer.innerHTML = '';
     anmResults.forEach(item => {
-        console.log(item);
         addItemtoSearch(item);
     })
 }
