@@ -25,7 +25,7 @@ let sendSearchRequest = () => {
     searchIconI(searchResult);
 
 }
-let addItemstoSearch = (results) => {
+let addItemtoSearch = (results) => {
     let searchContainer = document.querySelector('.search-content');
     console.log(searchContainer);
     let searchItem = `
@@ -46,7 +46,7 @@ let addItemstoSearch = (results) => {
 
 }
 
-addItemstoSearch({
-    title: 'test',
-    image: 'https://cdn.myanimelist.net/images/anime/5/87048.jpg'  
+
+fetch('/api/search', {
+    method: 'POST',
 })
