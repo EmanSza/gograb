@@ -58,7 +58,7 @@ function addItemstoSlides(items, slideId) {
             if (items[j]) {
                 let div = document.createElement('div');
                 div.classList.add('item');
-                div.innerHTML = generateItemHTML(items[j].title, items[j].image, items[j].link);
+                div.innerHTML = generateItemHTML(items[j].title, items[j].image, items[j].webLink);
                 slideContentId.children[i].appendChild(div);
             }
         }
@@ -101,7 +101,7 @@ function resizeSlides(items, id) {
             if (items[j]) {
                 let div = document.createElement('div');
                 div.classList.add('item');
-                div.innerHTML = generateItemHTML(items[j].title, items[j].image, items[j].link);
+                div.innerHTML = generateItemHTML(items[j].title, items[j].image, items[j].webLink);
                 slideContentId.children[i].appendChild(div);
 
 

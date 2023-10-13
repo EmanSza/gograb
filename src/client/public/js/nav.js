@@ -108,7 +108,7 @@ function sendPostRequest() {
         items.forEach(element => {
             const anchor = document.createElement('a');
             console.log(element);
-            anchor.href = element.link;
+            anchor.href = element.webLink;
 
             const image = document.createElement('img');
             image.src = element.image;

@@ -1,7 +1,5 @@
 const puppeteer = require('puppeteer');
 const nodeCache = require('node-cache');
-const myCache = new nodeCache();
-
 class Scrapper {
     constructor() {
         this.puppeteer = puppeteer;
@@ -9,10 +7,7 @@ class Scrapper {
         this.browser = null;
         this.page = null;
         this.url = "https://gogoanimehd.io/"
-        this.baseUrl = "https://gogoanimehd.io/"
-        this.myCache = myCache;
     }
-
     async startBrowser() {
         this.browser = await this.puppeteer.launch({ 
             headless: 'new',
@@ -32,38 +27,12 @@ class Scrapper {
         }
 
         await this.page.waitForSelector('.items li');
-        const animeList = await this.page.evaluate(() => {
-            const list = [];
-            const elements = document.querySelectorAll('.items li');
-            for (const element of elements) {
-                let anime = {
-                    title: element.querySelector('.name a').innerText,
-                    image: element.querySelector('.img a img').src,
-                    link: element.querySelector('.name a').href,
-                };
-                list.push(anime);
-            }
-            return list;
-        });
-        return animeList;
+        return await this.getAnimeInfo(this.page);
     }
     async getPopular() {
         await this.page.goto(this.url + "popular.html", { waitUntil: 'domcontentloaded' });
         await this.page.waitForSelector('.items li');
-        const animeList = await this.page.evaluate(() => {
-            const list = [];
-            const elements = document.querySelectorAll('.items li');
-            for (const element of elements) {
-                let anime = {
-                    title: element.querySelector('.name a').innerText,
-                    image: element.querySelector('.img a img').src,
-                    link: element.querySelector('.name a').href,
-                };
-                list.push(anime);
-            }
-            return list;
-        });
-        return animeList;
+        return await this.getAnimeInfo(this.page);
     }
     async getRecent() {
         await this.page.goto(this.url, { waitUntil: 'domcontentloaded' });
@@ -76,12 +45,29 @@ class Scrapper {
                     title: element.querySelector('.name a').innerText,
                     image: element.querySelector('.img a img').src,
                     link: element.querySelector('.name a').href,
+                    webLink: "anime/" + element.querySelector('.name a').href.split('/').pop().split('-episode-')[0],
                 };
                 list.push(anime);
             }
             return list;
         });
         return animeList;
+    }
+    async getAnimeInfo(page) {
+        return page.evaluate(() => {
+            const list = [];
+            const elements = document.querySelectorAll('.items li');
+            for (const element of elements) {
+                let anime = {
+                    title: element.querySelector('.name a').innerText,
+                    image: element.querySelector('.img a img').src,
+                    link: element.querySelector('.name a').href,
+                    webLink: "anime/" + element.querySelector('.name a').href.split('/category/')[1],
+                };
+                list.push(anime);
+            }
+            return list;
+        });
     }
 }
 

@@ -29,7 +29,7 @@ window.addEventListener('load', insertSearchIcon(searchButton, svgIcon));
 let addItemtoSearch = (results) => {
     let searchContainer = document.querySelector('.search-content');
     let searchItem = `
-        <a href="https://google.com/">
+        <a href="${results.webLink}">
             <div class="item-container" style="background-image: url(${results.image})">
                 <div class="item-content">
                     <div>
@@ -61,6 +61,7 @@ let sendSearchRequest = async () => {
         let searchContainer = document.querySelector('.search-content');
         searchContainer.innerHTML = '';
         data.scrappedResults.forEach(item => {
+            console.log(item);
             addItemtoSearch(item);
         })
         insertSearchIcon(searchButton, svgIcon);
@@ -81,6 +82,7 @@ searchButtonAll.addEventListener('click', (e) => {
 // if results is not empty OBJECT
 if (results != "false") {
     const anmResults = JSON.parse(results);
+    console.log(anmResults);
     let searchContainer = document.querySelector('.search-content');
     searchContainer.innerHTML = '';
     anmResults.forEach(item => {
