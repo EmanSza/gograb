@@ -32,11 +32,17 @@ header {
 .nav section {
     margin: 5px 10px;
 }
+.nav .nav-left {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
 .nav .nav-left a  {
     font-size: 1.2em;
     color: inherit;
     text-decoration: none;
     margin: 0 10px;
+    height: 100%;
 }
 .nav .nav-center a img {
     width: 60px;
@@ -115,4 +121,20 @@ header {
 }
 .results-container a:hover h2 {
     color: var(--soundary-color);
+}
+
+/* if the screen is 500px or less */
+@media screen and (max-width: 500px) {
+    .nav .nav-right {
+        display: none;
+    }
+    .nav .nav-left a {
+        margin: 25px 25px;
+    }
+    .nav {
+        /* center */
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
 }

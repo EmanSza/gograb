@@ -23,6 +23,6 @@
 }
 ::-webkit-scrollbar-thumb {
     background: var(--accent-color);
-    width: 50%;
+    width: 1px;
     border-radius: 10px;
 }
