@@ -1,13 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500&display=swap');
 :root {
     --main-color: #573A98;
     --soundary-color: #F53CDA;
     --accent-color: #ADA0DD;
     --tertiary-color: #F7F8F6;
+    --background-color: #dacbdf;
+    --content-border-radius: 25px;
 }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 1rem;
+    text-decoration: none;
+    list-style: none;
+}
+html, body {
+    margin: 0;
+    background-color: var(--background-color);
+ }
+
 .container {
     width: 100%;
     height: calc(100dvh - 80px);
-    background-color: #dacbdf;
+    background-color: var(--background-color);
     display: flex;
 	    flex-direction: column;
 	    flex-wrap: nowrap;

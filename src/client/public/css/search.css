@@ -1,19 +1,7 @@
-:root {
-    --main-color: #573A98;
-    --soundary-color: #F53CDA;
-    --accent-color: #ADA0DD;
-    --tertiary-color: #F7F8F6;
-    --content-border-radius: 25px;
- 
- }
- html, body {
-    margin: 0;
-    background-color: #dacbdf;
- }
 
  .container {
     width: 100%;
-    background-color: #dacbdf;
+    background-color: var(--background-color);
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
