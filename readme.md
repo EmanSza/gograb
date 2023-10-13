@@ -1,6 +1,6 @@
 <p align="center">
     <img width="200" src="https://sandboxinnovations.org/images/logo.png">
-    <img width="200" src="https://raw.githubusercontent.com/EmanSza/gograb/main/src/client/public/imagesgograbber-removebg.png">
+    <img width="200" src="https://raw.githubusercontent.com/EmanSza/gograb/main/src/client/public/images/gograbber-removebg.png">
 </p>
 <p style="margin-top: 20px;" align="center">A Solution by Sandbox Innovations</p>
 
