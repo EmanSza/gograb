@@ -36,8 +36,21 @@ router.get('/', async (req, res) => {
 
 router.get('/search', async (req, res) => {
   const searchTerm = req.query.search; 
-  
-  res.render('search', { results });  
+  // if its empty send a empty object
+  if (!searchTerm) {
+    return res.render('search', { searchTerm: {} });
+  }
+  const scrapper = new Scrapper();
+  await scrapper.startBrowser();
+
+  let scrappedResults = await scrapper.getAnime(searchTerm);
+
+  await scrapper.closeBrowser();
+  if (scrappedResults === null) {
+    return res.render('search', { searchTerm: {} });
+  }
+    
+  res.render('search', { scrappedResults });  
   
 });
 

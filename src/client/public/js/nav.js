@@ -1,5 +1,4 @@
 const searchForm = document.querySelector('#searchForm');
-console.log(searchForm);
 const searchInput = document.querySelector('#searchInput');
 
 let svgIcon = `
@@ -110,6 +109,7 @@ function sendPostRequest() {
         
         items.forEach(element => {
             const anchor = document.createElement('a');
+            console.log(element);
             anchor.href = element.link;
 
             const image = document.createElement('img');

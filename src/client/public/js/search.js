@@ -1,7 +1,5 @@
 let searchButton = document.getElementById('search-button-all');
 
-console.log(searchButton);
-
 let insertLoadingLogo = (element) => {
     let searchLogo = document.createElement('i');
     searchLogo.classList.add('fas', 'fa-search');
@@ -20,11 +18,6 @@ let insertSearchIcon = (element, svg) => {
 
 window.addEventListener('load', insertSearchIcon(searchButton, svgIcon));
 
-let sendSearchRequest = () => {
-    let searchResult = document.getElementById('search-button-all');
-    searchIconI(searchResult);
-
-}
 let addItemtoSearch = (results) => {
     let searchContainer = document.querySelector('.search-content');
     console.log(searchContainer);
@@ -45,8 +38,41 @@ let addItemtoSearch = (results) => {
     searchContainer.appendChild(searchDiv);
 
 }
+// When searching, when they hit enter we do not want to redirect the page
 
 
-fetch('/api/search', {
-    method: 'POST',
+let sendSearchRequest = async () => {
+    let input = document.getElementById('searchInputPage').value
+    console.log(input);   
+    fetch('/api/search', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ input })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.scrappedResults);
+        let searchContainer = document.querySelector('.search-content');
+        searchContainer.innerHTML = '';
+        data.scrappedResults.forEach(item => {
+            console.log(item);
+            addItemtoSearch(item);
+        })
+    })
+}
+
+let searchFormPage = document.getElementById('searchFormPage');
+searchFormPage.addEventListener('submit', (e) => {
+    console.log('submitting');
+    e.preventDefault();
+    sendSearchRequest();
 })
+let searchButtonAll = document.getElementById('search-button-all');
+searchButtonAll.addEventListener('click', (e) => {
+    e.preventDefault();
+    sendSearchRequest();
+})
+
+const anmResults = JSON.parse(results);
+console.log(window.location.href);
+console.log(anmResults);

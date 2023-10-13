@@ -8,10 +8,11 @@
  }
  html, body {
     margin: 0;
+    background-color: #dacbdf;
  }
+
  .container {
     width: 100%;
-    height: calc(100dvh - 80px);
     background-color: #dacbdf;
     display: flex;
     flex-direction: column;
@@ -39,7 +40,7 @@
    flex-direction: row;
    align-items: center;
 }
-.searchForm {
+.searchFormPage {
    background-color: var(--tertiary-color);
    border-radius: 5px;
    padding: 0 10px;
@@ -55,7 +56,7 @@
    font-weight: 500;
    font-size: 1em;
 }
-.searchInput {
+.searchInputPage {
    width: 90%;
    height: 100%;
    border: none;
@@ -68,11 +69,11 @@
    font-size: inherit;
    font-weight: inherit;
 }
-.searchForm input:focus, .searchForm button:focus {
+.searchFormPage input:focus, .searchForm button:focus {
    position: relative;
    outline: none;
 }
-.searchForm button {
+.searchFormPage button {
    padding: 0 10px;
    border: none;
    background-color: inherit;
@@ -80,27 +81,33 @@
    -moz-appearance: none;
    appearance: none;
 }
-.search-button:hover {
+.search-button-all:hover {
    cursor: pointer;
 }
 .search-content {
    margin: 0px 20px;
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   justify-content: flex-start;
+   align-items: center;
+   align-content: stretch;
 }
 .search-item {
-   width: 175px;
-   height: 300px;
+   width: 125px;
+   height: 225px;
    overflow: hidden;
+   margin: 10px 10px;
 }
 .search-item a {
    width: 100%;
    height: 100%;
    display: flex;
-   text-decoration: none   ;
+   text-decoration: none;
 }
 .item-container {
    width: 100%;
    height: 100%;
-   border-radius: 10px;
    background-position: center;
    background-repeat: no-repeat;
    background-size: cover;
@@ -113,6 +120,7 @@
 }
 .item-content {
    width: 100%;
+   height: fit-content;
    display: none;
    background-color: rgba(0, 0, 0, 0.5);
 	flex-direction: column;
@@ -120,8 +128,6 @@
 	justify-content: flex-end;
 	align-items: baseline;
 	align-content: stretch;
-   border-bottom-left-radius: 10px;
-   border-bottom-right-radius: 10px;
 
 }
 .item-content div h2 {
@@ -133,7 +139,7 @@
 }
 .item-content div {
    width: 100%;
-   max-height: 75px;
+   max-height: 100%;
 }
 .search-item a:hover .item-content {
    display: flex;

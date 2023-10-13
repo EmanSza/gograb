@@ -15,8 +15,8 @@
     <div class="container">
         <div class="search-content-container">
             <div class="searchform-container">
-                <form class="searchForm" action="/api/search" method="POST">
-                    <input class='searchInput'type="text" name="search" placeholder="Search Anime Titles">
+                <form id="searchFormPage" class="searchFormPage" action="api/search" method="POST" >
+                    <input id="searchInputPage" class='searchInputPage' type="text" name="search" placeholder="Search Anime Titles">
                     <button type="submit" id="search-button-all"></button>
                 </form> 
             </div>
@@ -25,5 +25,8 @@
         </div>
     </div>
 </body>
-
+<script>
+    const results = `<%- JSON.stringify(searchTerm) %>`;
+    console.log(results);
+</script>
 </html>
