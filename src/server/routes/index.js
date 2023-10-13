@@ -38,7 +38,7 @@ router.get('/search', async (req, res) => {
   const searchTerm = req.query.search; 
   // if its empty send a empty object
   if (!searchTerm) {
-    return res.render('search', { searchTerm: {} });
+    return res.render('search', { scrappedResults: false });
   }
   const scrapper = new Scrapper();
   await scrapper.startBrowser();
@@ -47,7 +47,7 @@ router.get('/search', async (req, res) => {
 
   await scrapper.closeBrowser();
   if (scrappedResults === null) {
-    return res.render('search', { searchTerm: {} });
+    return res.render('search', { scrappedResults: false });
   }
     
   res.render('search', { scrappedResults });  

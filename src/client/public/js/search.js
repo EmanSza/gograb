@@ -73,6 +73,16 @@ searchButtonAll.addEventListener('click', (e) => {
     sendSearchRequest();
 })
 
-const anmResults = JSON.parse(results);
-console.log(window.location.href);
-console.log(anmResults);
+// if results is not empty OBJECT
+if (results != "false") {
+    console.log(results);
+    const anmResults = JSON.parse(results);
+    console.log(anmResults);
+    let searchContainer = document.querySelector('.search-content');
+    searchContainer.innerHTML = '';
+    anmResults.forEach(item => {
+        console.log(item);
+        addItemtoSearch(item);
+    })
+}
+

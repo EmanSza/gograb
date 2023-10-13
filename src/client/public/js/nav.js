@@ -32,9 +32,8 @@ searchForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const searchInputValue = searchInput.value;
-
     if (searchInputValue) {
-        window.location.href = `/search?search=${encodeURIComponent(searchTerm)}`;
+        window.location.href = `/search?search=${encodeURIComponent(searchInputValue)}`;
 
         searchForm.submit();
     } else {
