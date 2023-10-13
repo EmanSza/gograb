@@ -82,7 +82,6 @@ function sendPostRequest() {
     searchIconI(searchIcon);
 
     let input = document.getElementById("searchInput").value;
-    console.log(input);
 
     let resultsContainer = document.querySelector('.results-container');
     resultsContainer.innerHTML = '';

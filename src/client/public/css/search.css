@@ -23,7 +23,7 @@
 }
 
 .search-content-container {
-   width: 90%;
+   width: 85%;
    background-color: var(--accent-color);
    border-radius: var(--content-border-radius);
    display: flex;
@@ -94,10 +94,13 @@
    align-content: stretch;
 }
 .search-item {
-   width: 125px;
-   height: 225px;
+   width: 135px;
+   height: 235px;
    overflow: hidden;
    margin: 10px 10px;
+   padding: 5px;
+   border-radius: 5px;
+   background-color: var(--main-color);
 }
 .search-item a {
    width: 100%;
