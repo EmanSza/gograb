@@ -18,7 +18,7 @@ function addSVGIcon() {
     svg.setAttributeNS(null, 'viewBox', '0 0 512 512');
     svg.setAttributeNS(null, 'width', '20px');
     svg.setAttributeNS(null, 'height', '20px');
-    svg.setAttributeNS(null, 'fill', '#000000');
+    svg.setAttributeNS(null, 'fill', '#dacbdf');
     svg.classList.add('search-icon1');
     svg.innerHTML = svgIcon;
     searchIcon.appendChild(svg);
@@ -74,6 +74,7 @@ let searchIconI = (element) => {
     // Make it 20x20
     icon.style.width = '20px';
     icon.style.height = '20px';
+    icon.style.color = '#dacbdf';
     element.innerHTML = '';
     element.appendChild(icon);
 }

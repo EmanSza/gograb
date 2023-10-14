@@ -154,6 +154,7 @@
     font-size: 0.8em;
     font-family: 'Inter', sans-serif;
     font-weight: 500;
+    color: var(--main-color);
 }
 .item:hover {
     transform: scale(1.1);

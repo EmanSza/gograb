@@ -37,7 +37,7 @@ header {
 .nav .nav-right {
     position: relative;
     background-color: var(--accent-color);
-    border-radius: 10px;
+    border-radius: 2px;
     margin: 0 10px;
     padding: 5px 10px;
 }
@@ -72,7 +72,10 @@ header {
     -moz-appearance: none;
     appearance: none;
     background-color: inherit;
-    /* Ceter */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 .results-container {
     position: absolute; /* Position the dropdown absolutely within the parent */

@@ -9,6 +9,7 @@ let insertLoadingLogo = (element) => {
     // Make it 20x20
     icon.style.width = '20px';
     icon.style.height = '20px';
+    icon.style.color = '#dacbdf';
     element.innerHTML = '';
     element.appendChild(icon);
 }
@@ -18,7 +19,7 @@ let insertSearchIcon = (element, svg) => {
     searchButton.setAttributeNS(null, 'viewBox', '0 0 512 512');
     searchButton.setAttributeNS(null, 'width', '20px');
     searchButton.setAttributeNS(null, 'height', '20px');
-    searchButton.setAttributeNS(null, 'fill', '#000000');
+    searchButton.setAttributeNS(null, 'fill', '#dacbdf');
     searchButton.classList.add('search-icon1');
     searchButton.innerHTML = svg;
     element.appendChild(searchButton);
