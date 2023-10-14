@@ -49,9 +49,15 @@ router.get('/search', async (req, res) => {
   if (scrappedResults === null) {
     return res.render('search', { scrappedResults: false });
   }
-    
+
   res.render('search', { scrappedResults });  
   
 });
+
+router.get('/anime/:id', async (req, res) => {
+  const animeId = req.params.id; 
+  // Before we continue we gotta design
+  
+})
 
 module.exports = router;
