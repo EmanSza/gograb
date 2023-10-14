@@ -27,12 +27,12 @@ class Scrapper {
         }
 
         await this.page.waitForSelector('.items li');
-        return await this.getAnimeInfo(this.page);
+        return await this.sortAnimeInfo(this.page);
     }
     async getPopular() {
         await this.page.goto(this.url + "popular.html", { waitUntil: 'domcontentloaded' });
         await this.page.waitForSelector('.items li');
-        return await this.getAnimeInfo(this.page);
+        return await this.sortAnimeInfo(this.page);
     }
     async getRecent() {
         await this.page.goto(this.url, { waitUntil: 'domcontentloaded' });
@@ -53,7 +53,7 @@ class Scrapper {
         });
         return animeList;
     }
-    async getAnimeInfo(page) {
+    async sortAnimeInfo(page) {
         return page.evaluate(() => {
             const list = [];
             const elements = document.querySelectorAll('.items li');
@@ -69,6 +69,54 @@ class Scrapper {
             return list;
         });
     }
+    async getAnimeInfo(animeId) {
+        console.log(this.url + "/category/" + animeId);
+        await this.page.goto(this.url + "/category/" + animeId, { waitUntil: 'domcontentloaded' });
+        await this.page.waitForSelector('.main_body');
+    
+        const animeInfo = await this.page.evaluate(() => {
+            const descriptions = {};
+            [...document.querySelector('.anime_info_body_bg').children].forEach(child => {
+                if (child.className != 'type' || child == null) return;
+    
+                let typeText = child.querySelector('span') ? child.querySelector('span').innerText.trim() : null;
+                if (!typeText) return;
+    
+                // Remove any colons from typeText
+                typeText = typeText.replace(/:/g, '');
+    
+                let mainText = child.innerText.replace(typeText, '').trim(); // Remove the span text and trim
+    
+                descriptions[typeText] = {
+                    type: typeText,
+                    text: mainText
+                };
+            });
+            const episodeElements = document.querySelectorAll('#episode_related li');
+            const episodeIds = [];
+            episodeElements.forEach((element) => {
+                let link = element.querySelector('a').href.split('/').pop()
+                let episodeId = link.split('-episode-')[1];
+                episodes = {
+                    episodeId: episodeId,
+                    link: link,
+                };
+                episodeIds.push(episodes);
+            });
+    
+            return {
+                title: document.querySelector('.anime_info_body_bg h1').innerText,
+                image: document.querySelector('.anime_info_body_bg img').src,
+                description: descriptions,
+                episodes: episodeIds
+            };
+        });
+
+
+        return animeInfo;
+    }
+    
+    
 }
 
 module.exports = Scrapper;

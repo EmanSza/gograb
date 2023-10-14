@@ -54,10 +54,4 @@ router.get('/search', async (req, res) => {
   
 });
 
-router.get('/anime/:id', async (req, res) => {
-  const animeId = req.params.id; 
-  // Before we continue we gotta design
-  
-})
-
 module.exports = router;

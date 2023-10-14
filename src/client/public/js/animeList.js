@@ -10,7 +10,7 @@ const parsedResultsRecent = JSON.parse(resultsRecent);
 
 function generateItemHTML(title, image, link) {
     return `
-        <a href="${link}" target="_blank">
+        <a href="${link}">
             <div class="image-container">
                 <img src="${image}" alt="image">
             </div>
