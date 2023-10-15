@@ -1,3 +1,8 @@
+# DISCLAIMER
+
+I EmanSza nor the Orginizations that I run do not endorse or support Piracy, I created this tool as a way to watch the content I have a license to watch. While this is a open source project I recommend buying, or licensing copys of any shows that you desire to watch.
+
+
 <p align="center">
     <img width="200" height="200" src="https://sandboxinnovations.org/images/logo.png">
     <img width="200" height="200" src="https://raw.githubusercontent.com/EmanSza/gograb/main/src/client/public/images/gograbber-removebg.png">
