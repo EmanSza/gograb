@@ -18,3 +18,8 @@
     display: flex;
     flex-direction: row;
 }
+.heading .image img {
+    width: 300px;
+    height: 500px;
+    margin: 10px;
+}

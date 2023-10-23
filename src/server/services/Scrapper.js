@@ -85,7 +85,13 @@ class Scrapper {
                 let mainText = child.innerText.replace(typeText, '').trim(); // Remove the span text and trim
                 typeText = typeText.replace(/:/g, '');
                 mainText = child.innerText.replace(/:/g, '');
-
+                
+                // Just making sure all unwanted spaced, newlines and tabs are removed
+                for (let i = 0; i < typeText.split(' ').length; i++) {
+                    mainText = mainText.replace(typeText.split(' ')[i], '');
+                }
+                while (mainText.charAt(0) === ' ')  mainText = mainText.substr(1);
+    
                 if (mainText == '') mainText = null;
                 descriptions[typeText] = {
                     type: typeText,
