@@ -103,7 +103,6 @@ class Scrapper {
                 };
                 episodeIds.push(episodes);
             });
-            console.log(episodeIds)
             return {
                 title: document.querySelector('.anime_info_body_bg h1').innerText,
                 image: document.querySelector('.anime_info_body_bg img').src,

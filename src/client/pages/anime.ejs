@@ -5,13 +5,29 @@
     <title>GoGrabbers</title>
     <link rel="stylesheet" href="/css/index.css" />
     <link rel="stylesheet" href="/css/nav.css" />
-    <link rel="stylesheet" href="/css/popular.css" />
+    <link rel="stylesheet" href="/css/anime.page.css" />
     <script src="/js/nav.js" async></script>
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <%- include('./templates/nav.ejs') %>
 <body>
+    <div class="container">
+        <div class="content">
+            <div class="heading">
+                <div class="image">
+
+                </div>
+                <div class="context">
+                    <div class="title">
+                        <h1><%= anime.title %></h1>
+                </div>
+                <div class="description">
+                    <p><%= anime['description']['Plot Summary'].text %></p>
+                </div>
+            </div>
+        </div>
+    </div>
     
 </body>
 </html>
