@@ -14,9 +14,9 @@ router.get('/:id', async (req, res) => {
   res.render('anime', { anime: scrappedResults });
 })
 router.get("/:id/download-season", async (req, res) => {
-  
+
 });
-router.get('/:id/:episode', async (req, res) => {
+router.get('/:id/episode/:episode', async (req, res) => {
   // TODO: Get the episode
   // Once Episode gathering works in getAnimeInfo, this will be used to get the episode
 })

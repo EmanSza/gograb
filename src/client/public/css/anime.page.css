@@ -8,7 +8,6 @@
 }
 .content {
     width: 95%;
-    height: 95%;
     min-width: 780px;
     min-height: 700px;
     background-color: var(--accent-color);
@@ -47,6 +46,12 @@
 }
 
 .info-tags {
+    margin: 10px 0px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.episodes {
     margin: 10px 0px;
     display: flex;
     flex-direction: row;

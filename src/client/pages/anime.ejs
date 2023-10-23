@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/nav.css" />
     <link rel="stylesheet" href="/css/anime.page.css" />
     <link rel="stylesheet" href="/css/anime/info.css" />
+    <link rel="stylesheet" href="/css/anime/episode.css" />
     <script src="/js/nav.js" async></script>
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,8 +31,7 @@
             </div>
             <div class="info-tags">
                 <%- include('./templates/anime/info.ejs', {
-                    title: "Episodes",
-                    value: anime.episodes.length,
+                    title: "Watch",
                     link: "#"
                     }) 
                 %>
@@ -41,7 +41,8 @@
                     }) 
                 %>
                 <%- include('./templates/anime/info.ejs', {
-                    title: "Watch",
+                    title: "Episodes",
+                    value: anime.episodes.length,
                     link: "#"
                     }) 
                 %>
@@ -53,7 +54,14 @@
                 %>
             </div>
             <div class="episodes">
-
+                <!-- for anime.episodes in episodes  include a file go backwards -->
+                <% for (let i = anime.episodes.length - 1; i >= 0; i--) { %>
+                    <%- include('./templates/anime/episode.ejs', {
+                        title: `Episode ${anime.episodes[i].episodeId}`,
+                        link: `/anime/${anime.name}/episode/${anime.episodes[i].episodeId}`
+                        }) 
+                    %>
+                <% } %>
             </div>
         </div>
     </div>

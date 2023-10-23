@@ -1,3 +1,9 @@
+.a-info {
+    margin: 5px 5px;
+}
+.a-info:first-child {
+    margin-left: 0;
+  }
 .info {
     min-width: 200px;
     max-width: 300px;
@@ -13,8 +19,8 @@
     border-radius: 10px;
     font-family: 'Inter', sans-serif;
     font-weight: 500;
-    margin: 0 5px;
 }
+
 .info p, span {
     font-size: 1.2rem;
 }
