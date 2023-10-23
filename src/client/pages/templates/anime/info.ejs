@@ -1,0 +1,17 @@
+<a href="<%= link %>">
+    <div class="info">
+        <% if (typeof value !== 'undefined') { %>
+            <% if (!value) { %>
+                <p><span class="title"><%= title %></span></p>
+            <% } else { %>
+                <p>
+                    <span class="title"><%= title %></span>
+                    :
+                    <span class="value"><%= value %></span>
+                </p>
+            <% } %>
+        <% } else { %>
+            <p><span class="title"><%= title %></span></p>
+        <% } %>        
+    </div>
+</a>

@@ -70,7 +70,7 @@ class Scrapper {
         });
     }
     async getAnimeInfo(animeId) {
-        console.log(this.url + "/category/" + animeId);
+        console.log(animeId);
         await this.page.goto(this.url + "/category/" + animeId, { waitUntil: 'domcontentloaded' });
         await this.page.waitForSelector('.main_body');
     
@@ -109,7 +109,6 @@ class Scrapper {
                 };
                 episodeIds.push(episodes);
             });
-
             return {
                 title: document.querySelector('.anime_info_body_bg h1').innerText,
                 image: document.querySelector('.anime_info_body_bg img').src,
@@ -118,7 +117,7 @@ class Scrapper {
             };
         });
 
-
+        animeInfo.name = animeId;
         return animeInfo;
     }
     

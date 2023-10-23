@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/css/index.css" />
     <link rel="stylesheet" href="/css/nav.css" />
     <link rel="stylesheet" href="/css/anime.page.css" />
+    <link rel="stylesheet" href="/css/anime/info.css" />
     <script src="/js/nav.js" async></script>
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,10 +22,38 @@
                 <div class="context">
                     <div class="title">
                         <h1><%= anime.title %></h1>
+                    </div>
+                    <div class="description">
+                        <p><%= anime['description']['Plot Summary'].text %></p>
+                    </div>
                 </div>
-                <div class="description">
-                    <p><%= anime['description']['Plot Summary'].text %></p>
-                </div>
+            </div>
+            <div class="info-tags">
+                <%- include('./templates/anime/info.ejs', {
+                    title: "Episodes",
+                    value: anime.episodes.length,
+                    link: "#"
+                    }) 
+                %>
+                <%- include('./templates/anime/info.ejs', {
+                    title: "Download Season",
+                    link: `anime/${anime.name}/download-season`
+                    }) 
+                %>
+                <%- include('./templates/anime/info.ejs', {
+                    title: "Watch",
+                    link: "#"
+                    }) 
+                %>
+                <%- include('./templates/anime/info.ejs', {
+                    title: "Released",
+                    value: anime.description.Released.text,
+                    link: "#"
+                    }) 
+                %>
+            </div>
+            <div class="episodes">
+
             </div>
         </div>
     </div>
