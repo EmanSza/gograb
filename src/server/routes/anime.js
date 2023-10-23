@@ -8,9 +8,10 @@ router.get('/:id', async (req, res) => {
   const scrapper = new Scrapper();
   await scrapper.startBrowser();
   let scrappedResults = await scrapper.getAnimeInfo(animeId);
+
   await scrapper.closeBrowser();
 
-  res.render('anime');
+  res.render('anime', { anime: scrappedResults });
 })
 router.get('/:id/:episode', async (req, res) => {
   // TODO: Get the episode
