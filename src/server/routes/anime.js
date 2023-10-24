@@ -8,7 +8,6 @@ router.get('/:id', async (req, res) => {
   const scrapper = new Scrapper();
   await scrapper.startBrowser();
   let scrappedResults = await scrapper.getAnimeInfo(animeId);
-  console.log(scrappedResults)
   await scrapper.closeBrowser();
 
   res.render('anime', { anime: scrappedResults });
