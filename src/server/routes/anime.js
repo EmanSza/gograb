@@ -3,7 +3,6 @@ const router = express.Router();
 const Scrapper = require('../services/Scrapper');
 
 router.get('/:id', async (req, res) => {
-  console.log("Anime route")
   const animeId = req.params.id; 
   const scrapper = new Scrapper();
   await scrapper.startBrowser();
@@ -18,6 +17,10 @@ router.get("/:id/download-season", async (req, res) => {
 router.get('/:id/episode/:episode', async (req, res) => {
   // TODO: Get the episode
   // Once Episode gathering works in getAnimeInfo, this will be used to get the episode
+   const animeId = req.params.id;
+  const episode = req.params.episode;
+  console.log(animeId, episode);
+  res.render('watch');
 })
 
 module.exports = router;

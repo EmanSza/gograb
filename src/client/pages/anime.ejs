@@ -32,12 +32,12 @@
             <div class="info-tags">
                 <%- include('./templates/anime/info.ejs', {
                     title: "Watch",
-                    link: "#"
+                    link: `/anime/${anime.name}/episode/${anime.episodes[anime.episodes.length - 1].episodeId}`
                     }) 
                 %>
                 <%- include('./templates/anime/info.ejs', {
                     title: "Download Season",
-                    link: `anime/${anime.name}/download-season`
+                    link: `/anime/${anime.name}/download-season`
                     }) 
                 %>
                 <%- include('./templates/anime/info.ejs', {

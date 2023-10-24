@@ -62,7 +62,6 @@ let sendSearchRequest = async () => {
         let searchContainer = document.querySelector('.search-content');
         searchContainer.innerHTML = '';
         data.scrappedResults.forEach(item => {
-            console.log(item);
             addItemtoSearch(item);
         })
         insertSearchIcon(searchButton, svgIcon);
@@ -83,7 +82,6 @@ searchButtonAll.addEventListener('click', (e) => {
 // if results is not empty OBJECT
 if (results != "false") {
     const anmResults = JSON.parse(results);
-    console.log(anmResults);
     let searchContainer = document.querySelector('.search-content');
     searchContainer.innerHTML = '';
     anmResults.forEach(item => {

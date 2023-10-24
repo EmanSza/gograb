@@ -28,8 +28,6 @@ function checkWidths () {
     slideContent.forEach(element => {
         itemsLength.push(element.childElementCount);
     });
-
-    console.log(itemsLength);
 }
 
 // On resize, check to see if items need to be removed or added

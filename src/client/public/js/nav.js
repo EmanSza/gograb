@@ -108,7 +108,6 @@ function sendPostRequest() {
         
         items.forEach(element => {
             const anchor = document.createElement('a');
-            console.log(element);
             anchor.href = element.webLink;
 
             const image = document.createElement('img');
@@ -134,3 +133,11 @@ function sendPostRequest() {
         console.error(error);
     });    
 }
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') {
+        window.history.back();
+    } else if (e.key === 'ArrowRight') {
+        window.history.forward();
+    }
+});
