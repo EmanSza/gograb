@@ -120,15 +120,22 @@ class Scrapper {
         return animeInfo;
     }
     async getEpisode(animeId, episodeId) {
-        await this.page.goto(this.url + "/category/" + animeId + "-episode-" + episodeId, { waitUntil: 'domcontentloaded' });
-        await this.page.waitForSelector('.anime_muti_link');
+        console.log(this.url + animeId + "-episode-" + episodeId)
+        await this.page.goto(this.url + animeId + "-episode-" + episodeId, { waitUntil: 'domcontentloaded' });
+        await this.page.waitForSelector('.anime_video_body');
         const episodeInfo = await this.page.evaluate(() => {
             const episode = {
-                title: document.querySelector('.anime_muti_link h4').innerText,
-                video: document.querySelector('.anime_muti_link iframe').src,
+                name: document.querySelector('.anime-info a').innerText,
+                video: document.querySelector('.play-video iframe').src,
+                autoplay: false,
             };
             return episode;
         });
+        episodeInfo.next_episode = {
+            episode_link: `/anime/${animeId}/episode/${episodeId + 1}`,
+            episode_id: episodeId + 1,
+            animeId: animeId,
+        }
         return episodeInfo;
     }
     async downloadEpisode(animeId, episodeId, quality) {

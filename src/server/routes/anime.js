@@ -17,10 +17,19 @@ router.get("/:id/download-season", async (req, res) => {
 router.get('/:id/episode/:episode', async (req, res) => {
   // TODO: Get the episode
   // Once Episode gathering works in getAnimeInfo, this will be used to get the episode
-   const animeId = req.params.id;
+  // if query autoplay is true, then add to scrapped results
+  const autoPlay = req.query.autoplay;
+  const animeId = req.params.id;
   const episode = req.params.episode;
-  console.log(animeId, episode);
-  res.render('watch');
+  const scrapper = new Scrapper();
+  await scrapper.startBrowser();
+  let scrappedResults = await scrapper.getEpisode(animeId, episode);
+  await scrapper.closeBrowser();
+  if (autoPlay) {
+    scrappedResults.autoPlay = true;
+  }
+  console.log(scrappedResults);
+  res.render('watch', { episode: scrappedResults });
 })
 
 module.exports = router;
