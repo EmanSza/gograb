@@ -1,5 +1,12 @@
 const {app, BrowserWindow} = require('electron');
 const path = require('path');
+const { ElectronBlocker } = require('@cliqz/adblocker-electron');
+const fetch = require('cross-fetch');
+const { session } = require('electron');
+
+ElectronBlocker.fromPrebuiltAdsAndTracking(fetch).then((blocker) => {
+  blocker.enableBlockingInSession(session.defaultSession);
+});
 
 const startElectron = () => {
     function createWindow () {

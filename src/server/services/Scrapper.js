@@ -120,7 +120,6 @@ class Scrapper {
         return animeInfo;
     }
     async getEpisode(animeId, episodeId) {
-        console.log(this.url + animeId + "-episode-" + episodeId)
         await this.page.goto(this.url + animeId + "-episode-" + episodeId, { waitUntil: 'domcontentloaded' });
         await this.page.waitForSelector('.anime_video_body');
         const episodeInfo = await this.page.evaluate(() => {
@@ -131,10 +130,26 @@ class Scrapper {
             };
             return episode;
         });
-        episodeInfo.next_episode = {
-            episode_link: `/anime/${animeId}/episode/${episodeId + 1}`,
-            episode_id: episodeId + 1,
+        episodeInfo.episode_id = episodeId;
+        episodeInfo.current_episode = {
+            episode_link: `/anime/${animeId}/episode/${episodeId}`,
+            episode_id: episodeId,
             animeId: animeId,
+        }
+        // if the number of episodes is greater than the current episode, then there is a next episode
+        if (parseInt(episodeId) + 1 <= parseInt(episodeInfo.episodes)) {
+            episodeInfo.next_episode = {
+                episode_link: `/anime/${animeId}/episode/${parseInt(episodeId) + 1}`,
+                episode_id: parseInt(episodeId) + 1,
+                animeId: animeId,
+            }
+        } else {
+            // have next episode be the anime page
+            episodeInfo.next_episode = {
+                episode_link: `/anime/${animeId}`,
+                episode_id: null,
+                animeId: animeId,
+            }
         }
         return episodeInfo;
     }

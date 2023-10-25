@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/css/index.css" />
     <link rel="stylesheet" href="/css/nav.css" />
     <link rel="stylesheet" href="/css/watch.css" />
+    <link rel="stylesheet" href="/css/anime/info.css" />
     <script src="/js/nav.js" async></script>
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +14,30 @@
 <%- include('./templates/nav.ejs') %>
 <body>
     <div class="container">
-
+        <div class="content">
+            <div class="video-container">
+                <div class="video">
+                    <iframe src="<%= episode.video %>" frameborder="0" allowfullscreen scrolling="no"></iframe>
+                </div>
+            </div>
+            <div class="information">
+                <div class="title">
+                    <h1><%= episode.name %> Episode <%= episode.episode_id %></h1>
+                </div>
+                <div class="info-tags">
+                        <%- include('./templates/anime/info.ejs', {
+                            title: "Download 1080p",
+                            link: `/anime/${episode.current_episode.animeId}/episode/${episode.current_episode.episode_id}/download?quality=1080p`
+                            })
+                        %>
+                        <%- include('./templates/anime/info.ejs', {
+                            title: "Watch Next Episode",
+                            link: `${episode.next_episode.episode_link}`
+                            })
+                        %>
+                </div>
+            </div>
+        </div>
     </div>
 
 </body>

@@ -31,5 +31,16 @@ router.get('/:id/episode/:episode', async (req, res) => {
   console.log(scrappedResults);
   res.render('watch', { episode: scrappedResults });
 })
+router.get('/:id/episode/:episode/download', async (req, res) => {
+  console.log("downloading episode");
+  const animeId = req.params.id;
+  const episode = req.params.episode;
+  const quality = req.query.quality;
+  const scrapper = new Scrapper();
+  await scrapper.startBrowser();
+  let scrappedResults = await scrapper.downloadEpisode(animeId, episode, quality);
+  await scrapper.closeBrowser();
+  res.redirect(scrappedResults);
+})
 
 module.exports = router;
