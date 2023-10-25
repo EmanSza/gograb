@@ -1,5 +1,6 @@
 .a-info {
     margin: 5px 5px;
+    transition: transform 0.5s ease;
 }
 .a-info:first-child {
     margin-left: 0;
@@ -28,3 +29,7 @@
     text-decoration: none;
     color: inherit;
 }
+.a-info:hover {
+    transform: scale(1.05);
+}
+
