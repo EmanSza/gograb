@@ -1,5 +1,8 @@
 const puppeteer = require('puppeteer');
-const nodeCache = require('node-cache');
+const axios = require('axios');
+const fs = require('fs');
+const path = require('path');
+
 class Scrapper {
     constructor() {
         this.puppeteer = puppeteer;
@@ -154,31 +157,66 @@ class Scrapper {
         return episodeInfo;
     }
     async downloadEpisode(animeId, episodeId, quality) {
-        await this.page.goto(this.url + "/category/" + animeId + "-episode-" + episodeId, { waitUntil: 'domcontentloaded' });
-        await this.page.waitForSelector('.favorites_book');
-        // download link is in ul li a
-        const downloadLink = await this.page.evaluate(() => {
-            const download = document.querySelector('.favorites_book ul li a').href;
-            return download;
-        });
-        // from that link there are a bunch of classes with the name download inthe parent mirror_link that has a parent called content-download. the 1080p link is the one with an a href with the words Download (1080P - mp4)
-        await this.page.goto(downloadLink, { waitUntil: 'domcontentloaded' });
-        await this.page.waitForSelector('.content-download');
-        // now that we waited for content-download get the mirror-link and its children
-        const downloadLink1080p = await this.page.evaluate(() => {
-            const download = document.querySelector('.content-download .mirror_link')
-            const downloadLinks = download.querySelectorAll(' .content-download .mirror_link .download');
-            let link = null;
-            downloadLinks.forEach((element) => {
-                if (element.querySelector('a').innerText == `Download (${quality} - mp4)`) {
-                    link = element.querySelector('a').href;
-                }
+        try {
+            await this.page.goto(this.url + "/category/" + animeId + "-episode-" + episodeId, { waitUntil: 'domcontentloaded' });
+            await this.page.waitForSelector('.favorites_book');
+
+            const downloadLink = await this.page.evaluate(() => {
+                return document.querySelector('.favorites_book ul li a').href;
             });
-        });
-        return downloadLink1080p;
+
+            await this.page.goto(downloadLink, { waitUntil: 'domcontentloaded' });
+            await this.page.waitForSelector('.content-download');
+
+            const downloadLink1080p = await this.page.evaluate((quality) => {
+                const download = document.querySelector('.content-download .mirror_link');
+                const downloadLinks = download.querySelectorAll('.download');
+                let link = null;
+                downloadLinks.forEach((element) => {
+                    if (element.querySelector('a').innerText.includes(`Download (${quality} - mp4)`)) {
+                        link = element.querySelector('a').href;
+                    }
+                });
+                return link;
+            }, quality);
+
+            if (!downloadLink1080p) {
+                throw new Error("Quality not found");
+            }
+
+            // Download the episode
+            await this.download(downloadLink1080p, animeId, episodeId);
+
+        } catch (error) {
+            console.error(`Error downloading episode: ${error}`);
+        }
     }
     // Now when we download seasons, we just go through each episode and download it
-    
+        async download(url, animeId, episodeId) {
+        const downloadDir = path.join(__dirname, 'downloads', animeId);
+
+        // Check if folder exists, if not create one
+        if (!fs.existsSync(downloadDir)) {
+            fs.mkdirSync(downloadDir, { recursive: true });
+        }
+
+        const filePath = path.join(downloadDir, `${animeId}-${episodeId}.mp4`);
+
+        const writer = fs.createWriteStream(filePath);
+
+        const response = await axios({
+            url,
+            method: 'GET',
+            responseType: 'stream'
+        });
+
+        response.data.pipe(writer);
+
+        return new Promise((resolve, reject) => {
+            writer.on('finish', resolve);
+            writer.on('error', reject);
+        });
+    }
 }
 
 module.exports = Scrapper;

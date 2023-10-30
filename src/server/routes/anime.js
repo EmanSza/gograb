@@ -36,7 +36,7 @@ router.get('/:id/episode/:episode', async (req, res) => {
   res.render('watch', { episode: scrappedResults });
 })
 router.post('/:id/:episode/download', async (req, res) => {
-  console.log("downloading episode");
+  // Will loop FROM THE CLIENT SIDE so we just download one episode at a time
   const animeId = req.params.id;
   const episode = req.params.episode;
   const quality = req.body.quality;
@@ -44,6 +44,7 @@ router.post('/:id/:episode/download', async (req, res) => {
   await scrapper.startBrowser();
   let scrappedResults = await scrapper.downloadEpisode(animeId, episode, quality);
   await scrapper.closeBrowser();
-  res.send(scrappedResults);
+
+  res.send({ link: scrappedResults });
 });
 module.exports = router;
