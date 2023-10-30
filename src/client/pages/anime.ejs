@@ -16,52 +16,56 @@
 <body>
     <div class="container">
         <div class="content">
-            <div class="heading">
-                <div class="image">
-                    <img src="<%= anime.image %>" alt="<%=  %>">
-                </div>
-                <div class="context">
-                    <div class="title">
-                        <h1><%= anime.title %></h1>
+            <div class="content-container">
+                <div class="heading">
+                    <div class="image">
+                        <img src="<%= anime.image %>" alt="<%=  %>">
                     </div>
-                    <div class="description">
-                        <p><%= anime['description']['Plot Summary'].text %></p>
+                    <div class="context">
+                        <div class="title">
+                            <h1><%= anime.title %></h1>
+                        </div>
+                        <div class="description">
+                            <p><%= anime['description']['Plot Summary'].text %></p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="info-tags">
-                <%- include('./templates/anime/info.ejs', {
-                    title: "Watch",
-                    link: `/anime/${anime.name}/episode/${anime.episodes[anime.episodes.length - 1].episodeId}`
-                    }) 
-                %>
-                <%- include('./templates/anime/info.ejs', {
-                    title: "Download Season",
-                    link: `/anime/${anime.name}/download-season`
-                    }) 
-                %>
-                <%- include('./templates/anime/info.ejs', {
-                    title: "Episodes",
-                    value: anime.episodes.length,
-                    link: "#"
-                    }) 
-                %>
-                <%- include('./templates/anime/info.ejs', {
-                    title: "Released",
-                    value: anime.description.Released.text,
-                    link: "#"
-                    }) 
-                %>
-            </div>
-            <div class="episodes">
-                <!-- for anime.episodes in episodes  include a file go backwards -->
-                <% for (let i = anime.episodes.length - 1; i >= 0; i--) { %>
-                    <%- include('./templates/anime/episode.ejs', {
-                        title: `Episode ${anime.episodes[i].episodeId}`,
-                        link: `/anime/${anime.name}/episode/${anime.episodes[i].episodeId}`
-                        }) 
-                    %>
-                <% } %>
+                <div class="info-container">
+                    <div class="info-tags">
+                        <%- include('./templates/anime/info.ejs', {
+                            title: "Watch",
+                            link: `/anime/${anime.name}/episode/${anime.episodes[anime.episodes.length - 1].episodeId}`
+                            }) 
+                        %>
+                        <%- include('./templates/anime/info.ejs', {
+                            title: "Download Season",
+                            link: `/anime/${anime.name}/download`
+                            }) 
+                        %>
+                        <%- include('./templates/anime/info.ejs', {
+                            title: "Episodes",
+                            value: anime.episodes.length,
+                            link: "#"
+                            }) 
+                        %>
+                        <%- include('./templates/anime/info.ejs', {
+                            title: "Released",
+                            value: anime.description.Released.text,
+                            link: "#"
+                            }) 
+                        %>
+                    </div>
+                </div>
+                <div class="episodes">
+                    <!-- for anime.episodes in episodes  include a file go backwards -->
+                    <% for (let i = anime.episodes.length - 1; i >= 0; i--) { %>
+                        <%- include('./templates/anime/episode.ejs', {
+                            title: `Episode ${anime.episodes[i].episodeId}`,
+                            link: `/anime/${anime.name}/episode/${anime.episodes[i].episodeId}`
+                            }) 
+                        %>
+                    <% } %>
+                </div>
             </div>
         </div>
     </div>

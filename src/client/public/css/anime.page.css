@@ -8,10 +8,10 @@
 }
 .content {
     width: 95%;
-    min-width: 780px;
-    min-height: 700px;
+    height: 95%;
+    min-width: 650px;
+    min-height: 600px;
     background-color: var(--accent-color);
-    padding: 15px;
     border-radius: 25px;
     display: flex;
 	flex-direction: column;
@@ -19,6 +19,7 @@
 .heading {
     display: flex;
     flex-direction: row;
+    margin: 15px 15px;
 }
 .context {
     display: flex;
@@ -52,7 +53,7 @@
     flex-wrap: wrap;
 }
 .episodes {
-    margin: 10px 0px;
+    margin: 10px 10px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

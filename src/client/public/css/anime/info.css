@@ -1,10 +1,10 @@
+.info-container {
+    margin: 10px 10px;
+}
 .a-info {
     margin: 5px 5px;
     transition: transform 0.5s ease;
 }
-.a-info:first-child {
-    margin-left: 0;
-  }
 .info {
     min-width: 200px;
     max-width: 300px;
